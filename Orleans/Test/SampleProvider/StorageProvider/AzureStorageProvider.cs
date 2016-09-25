@@ -40,7 +40,7 @@ namespace SampleProvider.StorageProvider
 
         private Task Initialize()
         {
-            logger.LogInformation("Initialize");
+            logger.LogInformation("Initialize. ConnectionString: {0}", ConnectionString);
             return Task.FromResult(true);
         }
     }

@@ -77,7 +77,7 @@
     <Compile Include="StorageProviderTests.cs" />
     <Compile Include="StorageProvider\AzureStorageProvider.cs" />
     <Compile Include="StorageProvider\Abstractions\IStorageProvider.cs" />
-    <Compile Include="StorageProvider\IStorageProviderGroup.cs" />
+    <Compile Include="StorageProvider\Abstractions\IStorageProviderGroup.cs" />
     <Compile Include="StorageProvider\StorageProviderGroup.cs" />
   </ItemGroup>
   <ItemGroup>
