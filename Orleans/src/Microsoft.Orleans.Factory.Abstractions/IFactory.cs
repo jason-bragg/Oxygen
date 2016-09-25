@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.Collections.Generic;
 
 namespace Microsoft.Orleans.Factory.Abstractions
 {
@@ -9,10 +10,11 @@ namespace Microsoft.Orleans.Factory.Abstractions
         TType Create();
     }
 
-    public interface IFactory<in TKey, out TType>
+    public interface IFactory<TKey, out TType>
         where TKey : IComparable<TKey>
         where TType : class
     {
+        IEnumerable<TKey> Keys { get; }
         TType Create(TKey key);
     }
 }

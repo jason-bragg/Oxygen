@@ -27,6 +27,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.Orleans.Factory.D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleProvider", "..\Test\SampleProvider\SampleProvider.csproj", "{CA47FA97-250A-4F64-BDC1-BD79078A51B0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.Orleans.Providers.Default", "Microsoft.Orleans.Providers.Default\Microsoft.Orleans.Providers.Default.csproj", "{A24B9243-EDC2-466A-A4BB-5887A6234354}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -77,6 +79,10 @@ Global
 		{CA47FA97-250A-4F64-BDC1-BD79078A51B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CA47FA97-250A-4F64-BDC1-BD79078A51B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CA47FA97-250A-4F64-BDC1-BD79078A51B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A24B9243-EDC2-466A-A4BB-5887A6234354}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A24B9243-EDC2-466A-A4BB-5887A6234354}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A24B9243-EDC2-466A-A4BB-5887A6234354}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A24B9243-EDC2-466A-A4BB-5887A6234354}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

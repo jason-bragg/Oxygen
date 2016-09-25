@@ -3,7 +3,7 @@ using System;
 
 namespace Microsoft.Orleans.Factory.Abstractions
 {
-    public interface IFactoryBuilder<in TKey, TType>
+    public interface IFactoryBuilder<TKey, TType>
         where TKey : IComparable<TKey>
         where TType : class
     {

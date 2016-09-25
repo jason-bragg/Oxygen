@@ -36,6 +36,8 @@ namespace Microsoft.Orleans.Factory.Default
                 factoryMap = map;
             }
 
+            public IEnumerable<TKey> Keys => factoryMap.Keys;
+
             public TType Create(TKey key)
             {
                 IFactory<TType> factory;

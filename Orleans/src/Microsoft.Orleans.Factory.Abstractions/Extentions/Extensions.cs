@@ -30,7 +30,18 @@ namespace Microsoft.Orleans.Factory.Abstractions.Extentions
             where TSpecialization : TType
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));
+            if (serviceProvider == null) throw new ArgumentNullException(nameof(serviceProvider));
             builder.Add(key, new InstanceFactory<TType, TSpecialization>(() => (TSpecialization)serviceProvider.GetService(typeof(TSpecialization)), configure));
+        }
+
+        public static void Add<TKey, TType>(this IFactoryBuilder<TKey, TType> builder, TKey key, Type specializationType, IServiceProvider serviceProvider, Action<TType> configure = null)
+            where TKey : IComparable<TKey>
+            where TType : class
+        {
+            if (builder == null) throw new ArgumentNullException(nameof(builder));
+            if (!typeof(TType).IsAssignableFrom(specializationType)) throw new ArgumentOutOfRangeException(nameof(specializationType), $"{specializationType} is not a {typeof(TType)}");
+            if (serviceProvider == null) throw new ArgumentNullException(nameof(serviceProvider));
+            builder.Add(key, new InstanceFactory<TType, TType>(() => (TType)serviceProvider.GetService(specializationType), configure));
         }
 
         private class InstanceFactory<TType, TSpecialization> : IFactory<TType>

@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
+using Microsoft.Orleans.Providers.Abstractions;
 using Microsoft.Orleans.Providers.Abstractions.Extensions;
 using Microsoft.Orleans.Silo.Abstractions;
 using Microsoft.Orleans.StorageProvider.Abstractions;
@@ -14,7 +15,7 @@ namespace SampleProvider.Silo
 
         public string ConnectionString { get; set; }
 
-        public SomePersistentGrain(ISiloRuntime runtime, ILoggerFactory loggerFactory, IStorageProviderGroup storageProviderGroup)
+        public SomePersistentGrain(ISiloRuntime runtime, ILoggerFactory loggerFactory, IProviderGroup<string,IStorageProvider> storageProviderGroup)
         {
             logger = loggerFactory.CreateLogger<AzureStorageProvider>();
             // assuming grain know which provider it want's via attribute, or something.

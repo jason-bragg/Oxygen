@@ -77,8 +77,7 @@
     <Compile Include="StorageProviderTests.cs" />
     <Compile Include="StorageProvider\AzureStorageProvider.cs" />
     <Compile Include="StorageProvider\Abstractions\IStorageProvider.cs" />
-    <Compile Include="StorageProvider\Abstractions\IStorageProviderGroup.cs" />
-    <Compile Include="StorageProvider\StorageProviderGroup.cs" />
+    <Compile Include="StorageProvider\Extensions\Extensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -107,6 +106,10 @@
     <ProjectReference Include="..\..\src\Microsoft.Orleans.Providers.Abstractions\Microsoft.Orleans.Providers.Abstractions.csproj">
       <Project>{1E4BAE19-2890-423D-8BCF-453E2802458A}</Project>
       <Name>Microsoft.Orleans.Providers.Abstractions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\Microsoft.Orleans.Providers.Default\Microsoft.Orleans.Providers.Default.csproj">
+      <Project>{A24B9243-EDC2-466A-A4BB-5887A6234354}</Project>
+      <Name>Microsoft.Orleans.Providers.Default</Name>
     </ProjectReference>
     <ProjectReference Include="..\TinkerHos\TinkerHost.csproj">
       <Project>{8A350203-0ACA-48DF-B15B-58FCED0B738E}</Project>
