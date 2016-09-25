@@ -87,7 +87,7 @@ namespace SampleProvider
             private IStorageProviderGroup CreateTheStorageProviderGroup(IServiceProvider serviceProvider)
             {
                 var group = serviceProvider.GetRequiredService<StorageProviderGroup>();
-                group.ConfiguredProviders = configuredAzureProviders.Select(kvp => kvp.Key).ToList().AsReadOnly();
+                group.Initialize(configuredAzureProviders.Select(kvp => kvp.Key));
                 return group;
             }
         }
