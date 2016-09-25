@@ -31,7 +31,6 @@ namespace TinkerHost
 
         public IHostBuilder ConfigureMembers(IEnumerable<Type> newNembers)
         {
-            if (newNembers == null) throw new ArgumentNullException(nameof(newNembers));
             foreach (Type type in newNembers)
             {
                 members.Add(type);

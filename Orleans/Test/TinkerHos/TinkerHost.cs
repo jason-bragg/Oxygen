@@ -13,16 +13,19 @@ namespace TinkerHost
         private readonly ILifecycleObserver lifecycle;
         private readonly List<object> members;
 
-        internal TinkerHost(IServiceCollection appServices, IServiceProvider hostingServiceProvider, IEnumerable<Type> members)
+        internal TinkerHost(IServiceCollection appServices, IServiceProvider hostingServiceProvider, IEnumerable<Type> memberTypes)
         {
             if (appServices == null) throw new ArgumentNullException(nameof(appServices));
             if (hostingServiceProvider == null) throw new ArgumentNullException(nameof(hostingServiceProvider));
-            if (members == null) throw new ArgumentNullException(nameof(members));
+            if (memberTypes == null) throw new ArgumentNullException(nameof(memberTypes));
 
-            this.members = members.Select(type => hostingServiceProvider.GetService(type) ?? Activator.CreateInstance(type))
+            Services = hostingServiceProvider;
+            members = memberTypes.Select(type => hostingServiceProvider.GetService(type) ?? Activator.CreateInstance(type))
                                   .ToList();
-            this.lifecycle = hostingServiceProvider.GetRequiredService<ILifecycleObserver>();
+            lifecycle = hostingServiceProvider.GetRequiredService<ILifecycleObserver>();
         }
+
+        public IServiceProvider Services { get; }
 
         public void Start()
         {

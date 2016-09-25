@@ -9,6 +9,8 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Console;
 using Microsoft.Orleans.Lifecycle.Abstractions;
 using Microsoft.Orleans.RingLifecycle.Abstractions;
+using Microsoft.Orleans.Lifecycle.Abstractions.Extensions;
+using Microsoft.Orleans.RingLifecycle.Abstractions.Extensions;
 using TinkerHost;
 
 namespace TinkerHostTests
@@ -21,9 +23,9 @@ namespace TinkerHostTests
         {
             IHostBuilder builder = TinkerHostBuilder.Create();
             builder.ConfigureLogging(factory => factory.AddProvider(new ConsoleLoggerProvider((s, l) => true, true)));
-            IHost Host = builder.Build<Startup>();
-            Host.Start();
-            Host.Dispose();
+            IHost host = builder.Build<Startup>();
+            host.Start();
+            host.Dispose();
         }
 
         [TestMethod]
@@ -31,14 +33,15 @@ namespace TinkerHostTests
         {
             IHostBuilder builder = TinkerHostBuilder.Create();
             builder.ConfigureLogging(factory => factory.AddProvider(new ConsoleLoggerProvider((s, l) => true, true)));
-            IHost Host = builder.Build<Startup2>();
-            Host.Start();
-            Host.Dispose();
+            IHost host = builder.Build<Startup2>();
+            host.Start();
+            host.Dispose();
         }
 
         private class Startup : IStartup
         {
             private readonly Type[] members;
+
             public Startup()
             {
                 members = new[] { typeof(Thingy) };
@@ -59,6 +62,7 @@ namespace TinkerHostTests
         private class Startup2 : IStartup
         {
             private readonly Type[] members;
+
             public Startup2()
             {
                 members = new[] { typeof(Thingy), typeof(Thingy2), typeof(Thingy3), typeof(Thingy4) };
@@ -77,35 +81,36 @@ namespace TinkerHostTests
             }
         }
 
-        public class Thingy : ILifecycleObserver
+        public class Thingy
         {
             private readonly ILogger logger;
+
             public Thingy(ILifecycleObservable lifecycle, ILoggerFactory loggerFactory)
             {
                 logger = loggerFactory.CreateLogger<Thingy>();
-                lifecycle.Subscribe(this);
+                lifecycle.Subscribe(Initialize, Start, Stop);
             }
 
-            public Task OnInitialize()
+            public Task Initialize()
             {
-                logger.LogInformation("OnInitialize");
+                logger.LogInformation("Initialize");
                 return Task.FromResult(true);
             }
 
-            public Task OnStart()
+            public Task Start()
             {
-                logger.LogInformation("OnStart");
+                logger.LogInformation("Start");
                 return Task.FromResult(true);
             }
 
-            public Task OnStop()
+            public Task Stop()
             {
-                logger.LogInformation("OnStop");
+                logger.LogInformation("Stop");
                 return Task.FromResult(true);
             }
         }
 
-        public class RingThingyBase : ILifecycleObserver
+        public class RingThingyBase
         {
             private readonly ILogger logger;
             private readonly int ring;
@@ -114,24 +119,24 @@ namespace TinkerHostTests
             {
                 logger = loggerFactory.CreateLogger(GetType());
                 this.ring = ring;
-                lifecycle.Subscribe(this, ring);
+                lifecycle.Subscribe(Initialize, Start, Stop, ring);
             }
 
-            public Task OnInitialize()
+            public Task Initialize()
             {
-                logger.LogInformation("OnInitialize. Ring: {0}", ring);
+                logger.LogInformation("Initialize. Ring: {0}", ring);
                 return Task.FromResult(true);
             }
 
-            public Task OnStart()
+            public Task Start()
             {
-                logger.LogInformation("OnStart. Ring: {0}", ring);
+                logger.LogInformation("Start. Ring: {0}", ring);
                 return Task.FromResult(true);
             }
 
-            public Task OnStop()
+            public Task Stop()
             {
-                logger.LogInformation("OnStop. Ring: {0}", ring);
+                logger.LogInformation("Stop. Ring: {0}", ring);
                 return Task.FromResult(true);
             }
         }

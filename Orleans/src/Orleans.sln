@@ -21,6 +21,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.Orleans.Host.Abst
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TinkerHost", "..\Test\TinkerHos\TinkerHost.csproj", "{8A350203-0ACA-48DF-B15B-58FCED0B738E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.Orleans.Factory.Abstractions", "Microsoft.Orleans.Factory.Abstractions\Microsoft.Orleans.Factory.Abstractions.csproj", "{9822ECD4-A180-423D-A911-DF193307DFE8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.Orleans.Factory.Default", "Microsoft.Orleans.Factory.Default\Microsoft.Orleans.Factory.Default.csproj", "{52A8972C-EAF3-4E36-AB9B-261649DEE1CB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleProvider", "..\Test\SampleProvider\SampleProvider.csproj", "{CA47FA97-250A-4F64-BDC1-BD79078A51B0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,6 +65,18 @@ Global
 		{8A350203-0ACA-48DF-B15B-58FCED0B738E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8A350203-0ACA-48DF-B15B-58FCED0B738E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8A350203-0ACA-48DF-B15B-58FCED0B738E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9822ECD4-A180-423D-A911-DF193307DFE8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9822ECD4-A180-423D-A911-DF193307DFE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9822ECD4-A180-423D-A911-DF193307DFE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9822ECD4-A180-423D-A911-DF193307DFE8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52A8972C-EAF3-4E36-AB9B-261649DEE1CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52A8972C-EAF3-4E36-AB9B-261649DEE1CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52A8972C-EAF3-4E36-AB9B-261649DEE1CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52A8972C-EAF3-4E36-AB9B-261649DEE1CB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA47FA97-250A-4F64-BDC1-BD79078A51B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA47FA97-250A-4F64-BDC1-BD79078A51B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA47FA97-250A-4F64-BDC1-BD79078A51B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA47FA97-250A-4F64-BDC1-BD79078A51B0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -66,5 +84,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{A435E96C-BC97-4EE9-9F8A-1E99B0A9DE48} = {01B0CE46-7F65-49B1-89DF-62222D22C5AB}
 		{8A350203-0ACA-48DF-B15B-58FCED0B738E} = {01B0CE46-7F65-49B1-89DF-62222D22C5AB}
+		{CA47FA97-250A-4F64-BDC1-BD79078A51B0} = {01B0CE46-7F65-49B1-89DF-62222D22C5AB}
 	EndGlobalSection
 EndGlobal
