@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{A24B9243-EDC2-466A-A4BB-5887A6234354}</ProjectGuid>
+    <ProjectGuid>{F9902FB3-71B1-47C4-8080-822CB9153AC2}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Microsoft.Orleans.Providers.Default</RootNamespace>
-    <AssemblyName>Microsoft.Orleans.Providers.Default</AssemblyName>
+    <RootNamespace>Microsoft.Orleans.Silo.Abstractions</RootNamespace>
+    <AssemblyName>Microsoft.Orleans.Silo.Abstractions</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,14 +30,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=1.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.1.0.0\lib\netstandard1.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.Extensions.Logging.Abstractions, Version=1.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.Logging.Abstractions.1.0.0\lib\netstandard1.1\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -48,27 +40,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Extensions\Extensions.cs" />
-    <Compile Include="ProviderGroupServiceBuilder.cs" />
+    <Compile Include="IMembershipOracle.cs" />
+    <Compile Include="IReminderService.cs" />
+    <Compile Include="ISilo.cs" />
+    <Compile Include="ISiloBuilder.cs" />
+    <Compile Include="IMessageCenter.cs" />
+    <Compile Include="IRuntime.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Microsoft.Orleans.Factory.Abstractions\Microsoft.Orleans.Factory.Abstractions.csproj">
-      <Project>{9822ecd4-a180-423d-a911-df193307dfe8}</Project>
-      <Name>Microsoft.Orleans.Factory.Abstractions</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Microsoft.Orleans.Factory.Default\Microsoft.Orleans.Factory.Default.csproj">
-      <Project>{52A8972C-EAF3-4E36-AB9B-261649DEE1CB}</Project>
-      <Name>Microsoft.Orleans.Factory.Default</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Microsoft.Orleans.Providers.Abstractions\Microsoft.Orleans.Providers.Abstractions.csproj">
-      <Project>{1E4BAE19-2890-423D-8BCF-453E2802458A}</Project>
-      <Name>Microsoft.Orleans.Providers.Abstractions</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

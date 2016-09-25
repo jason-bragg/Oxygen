@@ -15,7 +15,7 @@ namespace Microsoft.Orleans.Lifecycle.Abstractions.Extensions
             if (onStart == null) throw new ArgumentNullException(nameof(onStart));
             if (onStop == null) throw new ArgumentNullException(nameof(onStop));
 
-            return observable.Subscribe(new Observer(onInitialize, onStart, onStart));
+            return observable.Subscribe(new Observer(onInitialize, onStart, onStop));
         }
 
         public static IDisposable Subscribe(this ILifecycleObservable observable, Func<Task> onStart, Func<Task> onStop)

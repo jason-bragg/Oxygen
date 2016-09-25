@@ -29,6 +29,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleProvider", "..\Test\S
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.Orleans.Providers.Default", "Microsoft.Orleans.Providers.Default\Microsoft.Orleans.Providers.Default.csproj", "{A24B9243-EDC2-466A-A4BB-5887A6234354}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.Orleans.Silo.Abstractions", "Microsoft.Orleans.Silo.Abstractions\Microsoft.Orleans.Silo.Abstractions.csproj", "{F9902FB3-71B1-47C4-8080-822CB9153AC2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -83,6 +85,10 @@ Global
 		{A24B9243-EDC2-466A-A4BB-5887A6234354}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A24B9243-EDC2-466A-A4BB-5887A6234354}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A24B9243-EDC2-466A-A4BB-5887A6234354}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9902FB3-71B1-47C4-8080-822CB9153AC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9902FB3-71B1-47C4-8080-822CB9153AC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9902FB3-71B1-47C4-8080-822CB9153AC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9902FB3-71B1-47C4-8080-822CB9153AC2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

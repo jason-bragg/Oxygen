@@ -11,35 +11,36 @@ using Microsoft.Orleans.Providers.Abstractions;
 
 namespace Microsoft.Orleans.Providers.Default
 {
-    public class ProviderGroupBuilder<TKey, TProvider>
+    public class ProviderGroupServiceBuilder<TKey, TProvider>
         where TKey : IComparable<TKey>
         where TProvider : class
     {
-        private readonly IServiceCollection servicesCollection;
         private readonly List<ConfiguredProvider> configuredProviders;
 
-        public ProviderGroupBuilder(IServiceCollection services)
+        public ProviderGroupServiceBuilder(IServiceCollection services)
         {
             if(services == null) throw new ArgumentNullException(nameof(services));
-            servicesCollection = services;
+            Services = services;
             configuredProviders = new List<ConfiguredProvider>();
         }
+
+        public IServiceCollection Services { get; }
 
         public void Add<TSpecialization>(TKey key, Action<TSpecialization> configure = null)
             where TSpecialization : TProvider
         {
-            if(servicesCollection.All(descriptor => descriptor.ServiceType != typeof(TSpecialization)))
+            if(Services.All(descriptor => descriptor.ServiceType != typeof(TSpecialization)))
             {
-                servicesCollection.AddTransient(typeof(TSpecialization));
+                Services.AddTransient(typeof(TSpecialization));
             }
             configuredProviders.Add(new SpecializedConfiguredProvider<TSpecialization>(key, configure));
         }
 
         public IServiceCollection Build()
         {
-            servicesCollection.AddTransient<ProviderGroup>();
-            servicesCollection.AddSingleton(Create);
-            return servicesCollection;
+            Services.AddTransient<ProviderGroup>();
+            Services.AddSingleton(Create);
+            return Services;
         }
 
         private IFactory<TKey, TProvider> CreateProviderFactory(IServiceProvider serviceProvider)

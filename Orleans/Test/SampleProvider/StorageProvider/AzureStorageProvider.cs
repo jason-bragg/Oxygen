@@ -14,7 +14,7 @@ namespace SampleProvider.StorageProvider
 
         public string ConnectionString { get; set; }
 
-        public AzureStorageProvider(ISiloRuntime runtime, ILoggerFactory loggerFactory, ILifecycleObservable lifecycle)
+        public AzureStorageProvider(IRuntime runtime, ILoggerFactory loggerFactory, ILifecycleObservable lifecycle)
         {
             logger = loggerFactory.CreateLogger<AzureStorageProvider>();
             lifecycle.Subscribe(Initialize);

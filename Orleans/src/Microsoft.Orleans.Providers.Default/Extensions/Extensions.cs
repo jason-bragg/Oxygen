@@ -6,11 +6,11 @@ namespace Microsoft.Orleans.Providers.Default.Extensions
 {
     public static class Extensions
     {
-        public static ProviderGroupBuilder<TKey, TProvider> AddProviderGroup<TKey,TProvider>(this IServiceCollection serviceCollection)
+        public static ProviderGroupServiceBuilder<TKey, TProvider> AddProviderGroup<TKey,TProvider>(this IServiceCollection serviceCollection)
             where TKey : IComparable<TKey>
             where TProvider : class
         {
-            return new ProviderGroupBuilder<TKey, TProvider>(serviceCollection);
+            return new ProviderGroupServiceBuilder<TKey, TProvider>(serviceCollection);
         }
     }
 }

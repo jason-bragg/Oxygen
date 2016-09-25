@@ -7,7 +7,7 @@ namespace SampleProvider.StorageProvider.Extensions
 {
     public static class Extensions
     {
-        public static ProviderGroupBuilder<TKey, IStorageProvider> AddAzureStorageProvider<TKey>(this ProviderGroupBuilder<TKey, IStorageProvider> builder, TKey key, string connectionString)
+        public static ProviderGroupServiceBuilder<TKey, IStorageProvider> AddAzureStorageProvider<TKey>(this ProviderGroupServiceBuilder<TKey, IStorageProvider> builder, TKey key, string connectionString)
             where TKey : IComparable<TKey>
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));

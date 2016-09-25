@@ -15,7 +15,7 @@ namespace SampleProvider.Silo
 
         public string ConnectionString { get; set; }
 
-        public SomePersistentGrain(ISiloRuntime runtime, ILoggerFactory loggerFactory, IProviderGroup<string,IStorageProvider> storageProviderGroup)
+        public SomePersistentGrain(IRuntime runtime, ILoggerFactory loggerFactory, IProviderGroup<string,IStorageProvider> storageProviderGroup)
         {
             logger = loggerFactory.CreateLogger<AzureStorageProvider>();
             // assuming grain know which provider it want's via attribute, or something.

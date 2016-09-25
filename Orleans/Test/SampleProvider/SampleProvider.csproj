@@ -71,8 +71,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Silo\Abstractions\ISiloRuntime.cs" />
-    <Compile Include="Silo\DummySiloRuntime.cs" />
+    <Compile Include="Silo\DummyMembershipOracle.cs" />
+    <Compile Include="Silo\DummyMessageCenter.cs" />
+    <Compile Include="Silo\DummyReminderService.cs" />
+    <Compile Include="Silo\DummyRuntime.cs" />
+    <Compile Include="Silo\DummySilo.cs" />
+    <Compile Include="Silo\Extensions\Extensions.cs" />
     <Compile Include="Silo\SomePersistentGrain.cs" />
     <Compile Include="StorageProviderTests.cs" />
     <Compile Include="StorageProvider\AzureStorageProvider.cs" />
@@ -110,6 +114,10 @@
     <ProjectReference Include="..\..\src\Microsoft.Orleans.Providers.Default\Microsoft.Orleans.Providers.Default.csproj">
       <Project>{A24B9243-EDC2-466A-A4BB-5887A6234354}</Project>
       <Name>Microsoft.Orleans.Providers.Default</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\Microsoft.Orleans.Silo.Abstractions\Microsoft.Orleans.Silo.Abstractions.csproj">
+      <Project>{f9902fb3-71b1-47c4-8080-822cb9153ac2}</Project>
+      <Name>Microsoft.Orleans.Silo.Abstractions</Name>
     </ProjectReference>
     <ProjectReference Include="..\TinkerHos\TinkerHost.csproj">
       <Project>{8A350203-0ACA-48DF-B15B-58FCED0B738E}</Project>
