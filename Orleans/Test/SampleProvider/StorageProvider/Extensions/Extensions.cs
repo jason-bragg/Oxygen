@@ -12,7 +12,7 @@ namespace SampleProvider.StorageProvider.Extensions
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));
             if (string.IsNullOrWhiteSpace(connectionString)) throw new ArgumentNullException(nameof(connectionString));
-            builder.Add<AzureStorageProvider>(key, (provider) => provider.ConnectionString = connectionString);
+            builder.Add<AzureStorageProvider>(key, (provider) => provider.Configure(connectionString));
             return builder;
         }
     }

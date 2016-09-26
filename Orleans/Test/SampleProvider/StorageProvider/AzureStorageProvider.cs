@@ -11,12 +11,18 @@ namespace SampleProvider.StorageProvider
     public class AzureStorageProvider : IStorageProvider
     {
         private readonly ILogger logger;
+        private readonly ILifecycleObservable lifecycle;
+        private string connectionString;
 
-        public string ConnectionString { get; set; }
-
-        public AzureStorageProvider(IRuntime runtime, ILoggerFactory loggerFactory, ILifecycleObservable lifecycle)
+        public AzureStorageProvider(IRuntime runtime, ILoggerFactory loggerFactory, ILifecycleObservable lifecycleObservable)
         {
             logger = loggerFactory.CreateLogger<AzureStorageProvider>();
+            lifecycle = lifecycleObservable;
+        }
+
+        public  void Configure(string azureConnectionString)
+        {
+            connectionString = azureConnectionString;
             lifecycle.Subscribe(Initialize);
         }
 
@@ -40,7 +46,7 @@ namespace SampleProvider.StorageProvider
 
         private Task Initialize()
         {
-            logger.LogInformation("Initialize. ConnectionString: {0}", ConnectionString);
+            logger.LogInformation("Initialize. ConnectionString: {0}", connectionString);
             return Task.FromResult(true);
         }
     }
