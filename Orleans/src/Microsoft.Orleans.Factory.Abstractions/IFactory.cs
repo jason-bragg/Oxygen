@@ -14,7 +14,7 @@ namespace Microsoft.Orleans.Factory.Abstractions
         where TKey : IComparable<TKey>
         where TType : class
     {
-        IEnumerable<TKey> Keys { get; }
+        IReadOnlyCollection<TKey> Keys { get; }
         TType Create(TKey key);
     }
 }

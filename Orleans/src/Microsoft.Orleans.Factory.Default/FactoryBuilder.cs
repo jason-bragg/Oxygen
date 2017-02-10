@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using Microsoft.Orleans.Factory.Abstractions;
+using System.Linq;
 
 namespace Microsoft.Orleans.Factory.Default
 {
@@ -36,7 +37,7 @@ namespace Microsoft.Orleans.Factory.Default
                 factoryMap = map;
             }
 
-            public IEnumerable<TKey> Keys => factoryMap.Keys;
+            public IReadOnlyCollection<TKey> Keys => factoryMap.Keys.ToList().AsReadOnly();
 
             public TType Create(TKey key)
             {
