@@ -1,20 +1,25 @@
 ﻿
+using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Orleans.Facet.Abstractions;
 using Microsoft.Orleans.Factory.Abstractions;
-using System;
+using Microsoft.Orleans.Factory.Default;
+using Microsoft.Orleans.Factory.Abstractions.Extentions;
 
 namespace FacetTests
 {
     [TestClass]
-    public class FacetClass
+    public class FacetClassTests
     {
         [TestMethod]
         public void HappyPath()
         {
             IServiceCollection services = new ServiceCollection();
-            services.AddSingleton<IFactory<IHelloFacet>, InstanceFactory<IHelloFacet, HelloFacet>>();
+            IFactoryBuilder<string, IHelloFacet> builder = new FactoryBuilder<string, IHelloFacet>();
+            builder.Add<string, IHelloFacet, HelloFacet>("h1");
+            builder.Add<string, IHelloFacet, HelloFacet2>("h2");
+            services.AddSingleton<IFactory<string, IHelloFacet>>((sp) => builder.Build());
             services.AddSingleton<IFactory<IEchoFacet>, InstanceFactory<IEchoFacet, EchoFacet>>();
             IServiceProvider serviceProvider = services.BuildServiceProvider();
 
@@ -22,7 +27,8 @@ namespace FacetTests
             Bob bob = new Bob();
             facetInfo.SetFields(bob, serviceProvider);
 
-            bob.Hello.Hello();
+            bob.Hello1.Hello();
+            bob.Hello2.Hello();
             bob.Echo.Echo("blarg");
         }
     }
@@ -37,6 +43,14 @@ namespace FacetTests
         public void Hello()
         {
             Console.WriteLine("Hello");
+        }
+    }
+
+    public class HelloFacet2 : IHelloFacet
+    {
+        public void Hello()
+        {
+            Console.WriteLine("Hello2");
         }
     }
 
@@ -55,10 +69,14 @@ namespace FacetTests
 
     public class Bob
     {
-        private readonly IHelloFacet hello;
+        [Facet("h1")]
+        private readonly IHelloFacet hello1;
+        [Facet("h2")]
+        private readonly IHelloFacet hello2;
         private readonly IEchoFacet echo;
 
-        public IHelloFacet Hello => hello;
+        public IHelloFacet Hello1 => hello1;
+        public IHelloFacet Hello2 => hello2;
         public IEchoFacet Echo => echo;
     }
 

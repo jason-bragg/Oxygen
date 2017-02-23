@@ -26,12 +26,16 @@ namespace Microsoft.Orleans.Facet.Abstractions
 
         private Action<object, IServiceProvider> MakeFieldSetter(FieldInfo fieldInfo)
         {
+            FacetAttribute attribute = fieldInfo.GetCustomAttribute<FacetAttribute>();
+            Type factoryType = attribute == null
+                ? FactoryType.CreateFactoryInterfaceType(fieldInfo.FieldType)
+                : FactoryType.CreateFactoryInterfaceType(typeof(string), fieldInfo.FieldType);
+            MethodInfo createFn = factoryType.GetMethod("Create");
             return (obj, sp) =>
             {
-                Type factoryType = FactoryType.CreateFactoryInterfaceType(fieldInfo.FieldType);
                 object factory = sp.GetService(factoryType);
-                var createFn = factoryType.GetMethod("Create");
-                object instance = createFn.Invoke(factory, null);
+                object[] args = attribute == null ? null : new[] { attribute?.Name };
+                object instance = createFn.Invoke(factory, args);
                 fieldInfo.SetValue(obj, instance);
             };
         }
