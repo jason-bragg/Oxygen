@@ -33,6 +33,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.Orleans.Silo.Abst
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.Orleans.Facet.Abstractions", "Microsoft.Orleans.Facet.Abstractions\Microsoft.Orleans.Facet.Abstractions.csproj", "{6B598426-483A-4B9C-88FB-A08D4CBD2A13}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FacetTests", "..\Test\FacetTests\FacetTests.csproj", "{BEB3EE4B-678E-4D11-BD20-5AF0CE1F18AD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -95,6 +97,10 @@ Global
 		{6B598426-483A-4B9C-88FB-A08D4CBD2A13}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6B598426-483A-4B9C-88FB-A08D4CBD2A13}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6B598426-483A-4B9C-88FB-A08D4CBD2A13}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BEB3EE4B-678E-4D11-BD20-5AF0CE1F18AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BEB3EE4B-678E-4D11-BD20-5AF0CE1F18AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BEB3EE4B-678E-4D11-BD20-5AF0CE1F18AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BEB3EE4B-678E-4D11-BD20-5AF0CE1F18AD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -103,5 +109,6 @@ Global
 		{A435E96C-BC97-4EE9-9F8A-1E99B0A9DE48} = {01B0CE46-7F65-49B1-89DF-62222D22C5AB}
 		{8A350203-0ACA-48DF-B15B-58FCED0B738E} = {01B0CE46-7F65-49B1-89DF-62222D22C5AB}
 		{CA47FA97-250A-4F64-BDC1-BD79078A51B0} = {01B0CE46-7F65-49B1-89DF-62222D22C5AB}
+		{BEB3EE4B-678E-4D11-BD20-5AF0CE1F18AD} = {01B0CE46-7F65-49B1-89DF-62222D22C5AB}
 	EndGlobalSection
 EndGlobal

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Microsoft.Orleans.Facet.Abstractions
 {
-    interface IGrainFacet
+    public interface IGrainFacet
     {
     }
 }
