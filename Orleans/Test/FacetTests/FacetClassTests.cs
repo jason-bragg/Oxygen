@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Orleans.Facet.Abstractions;
@@ -13,7 +14,7 @@ namespace FacetTests
     public class FacetClassTests
     {
         [TestMethod]
-        public void HappyPath()
+        public void HappyFieldPath()
         {
             IServiceCollection services = new ServiceCollection();
             IFactoryBuilder<string, IHelloFacet> builder = new FactoryBuilder<string, IHelloFacet>();
@@ -31,6 +32,29 @@ namespace FacetTests
             bob.Hello2.Hello();
             bob.Echo.Echo("blarg");
         }
+
+        [TestMethod]
+        public void HappyConstructorPath()
+        {
+            IServiceCollection services = new ServiceCollection();
+            IFactoryBuilder<string, IHelloFacet> builder = new FactoryBuilder<string, IHelloFacet>();
+            builder.Add<string, IHelloFacet, HelloFacet>("h1");
+            builder.Add<string, IHelloFacet, HelloFacet2>("h2");
+            services.AddSingleton<IFactory<string, IHelloFacet>>((sp) => builder.Build());
+            services.AddSingleton<IFactory<IEchoFacet>, InstanceFactory<IEchoFacet, EchoFacet>>();
+            services.AddTransient<Fidget>();
+            IServiceProvider serviceProvider = services.BuildServiceProvider();
+
+            TypeFacetInfo facetInfo = new TypeFacetInfo(typeof(Bob2));
+            object[] facets = facetInfo.CreateConstructorParameterFacets(serviceProvider);
+            Bob2 bob = ActivatorUtilities.CreateInstance<Bob2>(serviceProvider, facetInfo.CreateConstructorParameterFacets(serviceProvider));
+
+            bob.Hello1.Hello();
+            bob.Hello2.Hello();
+            bob.Echo.Echo("blarg");
+            bob.Fidget.Dance();
+        }
+
     }
 
     public interface IHelloFacet : IGrainFacet
@@ -88,5 +112,55 @@ namespace FacetTests
         {
             return new TSpecialization();
         }
+    }
+
+    public interface ITransactionMonitor<TState>
+    {
+        Task OnCompleted(TState state);
+        Task OnAborted(TState state);
+    }
+
+    public interface ITransactionalState<TState> : IGrainFacet
+    {
+        TState State { get; }
+        ITransactionMonitor<TState> Monitor { set; }
+        void Save();
+    }
+    public class Bob2
+    {
+        public Bob2()
+        { }
+
+        [FacetConstructor]
+        public Bob2(
+            [Facet("h1")]
+            IHelloFacet hello1,
+            [Facet("h2")]
+            IHelloFacet hello2,
+            IEchoFacet echo,
+            Fidget fidget)
+        {
+            this.Hello1 = hello1;
+            this.Hello2 = hello2;
+            this.Echo = echo;
+            this.Fidget = fidget;
+        }
+        
+        public IHelloFacet Hello1 { get; }
+
+        public IHelloFacet Hello2 { get; }
+
+        public IEchoFacet Echo { get; }
+
+        public Fidget Fidget { get; set; }
+    }
+
+    public class Fidget
+    {
+        public void Dance()
+        {
+            Console.WriteLine("Dance!");
+        }
+
     }
 }
