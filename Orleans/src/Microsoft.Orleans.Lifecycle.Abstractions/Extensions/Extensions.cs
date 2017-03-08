@@ -45,5 +45,55 @@ namespace Microsoft.Orleans.Lifecycle.Abstractions.Extensions
             public Task OnStart() => onStart();
             public Task OnStop() => onStop();
         }
+
+        public static IDisposable OnStart<TKey>(this IStagedLifecycle<TKey> lifecycle, TKey key, Func<Task> action)
+        {
+            return lifecycle.Start[key].OnStage(action);
+        }
+
+        public static IDisposable OnStage(this IStage stage, Func<Task> action)
+        {
+            TaskCompletionSource<bool> canceled = new TaskCompletionSource<bool>();
+            stage.WaitOn(WrapAction(stage, action, canceled.Task));
+            return new DisposableAction(() => canceled.TrySetResult(true));
+        }
+
+        public static void OnStage(this IStage stage, Func<Task> action, Task canceled)
+        {
+            stage.WaitOn(WrapAction(stage, action, canceled));
+        }
+
+        public static IDisposable Subscribe<TKey>(this IStagedLifecycle<TKey> lifecycle, TKey key, ILifecycleObserver observer)
+        {
+            TaskCompletionSource<bool> canceled = new TaskCompletionSource<bool>();
+            lifecycle.Start[key].OnStage(observer.OnStart, canceled.Task);
+            lifecycle.Stop[key].OnStage(observer.OnStop, canceled.Task);
+            return new DisposableAction(() => canceled.TrySetResult(true));
+
+        }
+
+        private static async Task WrapAction(IStage stage, Func<Task> action, Task canceled)
+        {
+            Task completed = await Task.WhenAny(stage.Signal, canceled);
+            if(completed == stage.Signal)
+            {
+                await action();
+            }
+        }
+
+        private class DisposableAction : IDisposable
+        {
+            private readonly Action action;
+
+            public DisposableAction(Action action)
+            {
+                this.action = action;
+            }
+
+            public void Dispose()
+            {
+                this.action();
+            }
+        }
     }
 }

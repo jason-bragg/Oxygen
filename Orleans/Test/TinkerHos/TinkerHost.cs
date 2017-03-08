@@ -29,7 +29,6 @@ namespace TinkerHost
 
         public void Start()
         {
-            lifecycle.OnInitialize().Wait();
             lifecycle.OnStart().Wait();
         }
 

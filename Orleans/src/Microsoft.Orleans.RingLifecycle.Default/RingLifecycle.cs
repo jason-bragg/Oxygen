@@ -18,11 +18,6 @@ namespace Microsoft.Orleans.RingLifecycle.Default
             subscribers = new ConcurrentDictionary<object, OrderedObserver>();
         }
 
-        public Task OnInitialize()
-        {
-            return Task.WhenAll(subscribers.OrderBy(kvp => kvp.Value.Ring).Select(kvp => kvp.Value.Observer.OnInitialize()));
-        }
-
         public Task OnStart()
         {
             return Task.WhenAll(subscribers.OrderBy(kvp => kvp.Value.Ring).Select(kvp => kvp.Value.Observer.OnStart()));

@@ -9,4 +9,11 @@ namespace Microsoft.Orleans.Lifecycle.Abstractions
 
         void RequestTermination(bool graceful = true);
     }
+
+    public interface ILifecycleObservable<TKey>
+    {
+        IDisposable Subscribe(TKey key, ILifecycleObserver observer);
+
+        void RequestTermination(bool graceful = true);
+    }
 }

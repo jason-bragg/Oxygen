@@ -16,11 +16,6 @@ namespace Microsoft.Orleans.Lifecycle.Default
             subscribers = new ConcurrentDictionary<object, ILifecycleObserver>();
         }
 
-        public Task OnInitialize()
-        {
-            return Task.WhenAll(subscribers.Select(kvp => kvp.Value.OnInitialize()));
-        }
-
         public Task OnStart()
         {
             return Task.WhenAll(subscribers.Select(kvp => kvp.Value.OnStart()));
