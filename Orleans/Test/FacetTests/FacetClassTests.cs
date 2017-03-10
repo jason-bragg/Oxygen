@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.Extensions.DependencyInjection;
@@ -47,7 +48,8 @@ namespace FacetTests
 
             TypeFacetInfo facetInfo = new TypeFacetInfo(typeof(Bob2));
             object[] facets = facetInfo.CreateConstructorParameterFacets(serviceProvider);
-            Bob2 bob = ActivatorUtilities.CreateInstance<Bob2>(serviceProvider, facetInfo.CreateConstructorParameterFacets(serviceProvider));
+            ObjectFactory factory = ActivatorUtilities.CreateFactory(typeof(Bob2), facets.Select(f => f.GetType()).ToArray());
+            Bob2 bob = factory.Invoke(serviceProvider, facets) as Bob2;
 
             bob.Hello1.Hello();
             bob.Hello2.Hello();
